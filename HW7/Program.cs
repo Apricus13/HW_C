@@ -10,11 +10,11 @@ void Task47()
       MyLibClass.FillArray(matrix,-3,20);  //новый метод описан в MyLib
       MyLibClass.PrintArray(matrix);      //новый метод описан в MyLib
    }
- // Task47();
+ Task47();
 
 void Task50()
    {
-      Console.Clear();
+      //Console.Clear();
       Console.WriteLine("Задача 50. Напишите программу, которая на вход принимает индексы элемента в двумерном массиве, и возвращает значение этого элемента или же указание, что такого элемента нет.");
       int rows = 3; //колличество строк
       int colums = 4; // колличество столбцов
@@ -26,12 +26,14 @@ void Task50()
       int j = MyLibClass.Input("Введите индекс столбца: ");
       if (0<=i&&i<rows&&0<=j&&j<colums) Console.Write($"{matrix[i,j]}");
       else Console.Write("Элемент не существует");
+      Console.WriteLine();
+
    }
- // Task50();
+ Task50();
 
 void Task52()
    {
-      Console.Clear();
+      //Console.Clear();
       Console.WriteLine("Задача 52: Задайте двумерный массив из целых чисел.Найдите среднее арифметическое элементов в каждом столбце.");
       int rows = 3; //колличество строк
       int colums = 4; // колличество столбцов
