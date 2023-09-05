@@ -1,84 +1,124 @@
-﻿namespace Project;
-class Program
+﻿int Input(string text)   //метод приема данных с преобразованием в int
 {
-    static void Main(string[] args)
+    Console.Write(text);
+    return Convert.ToInt32(Console.ReadLine());
+}
+void FillArray(int [] array, int minValue = -9, int maxValue =9) //метод заполнения массива, введенные значения параметров minValue и  maxValue позволяют делать эти параметры не 
+                                                                //обязательными к заполнению
+{ 
+    maxValue++; //т.к. верхняя граница не включается
+    Random rnd = new Random(); // вызов конструктора для заполнения рондомными числами
+    for (int i = 0; i < array.Length; i++) // заполняем массив  numbers.Length - размер массива
     {
-        int Input (string text)
-        {
-            Console.Write(text);
-        return Convert.ToInt32(Console.ReadLine());
+        array[i] = rnd.Next(minValue, maxValue); //верхняя граница не включается
+    }
+}
+void FillArrayDouble(double [] array, int minValue = -9, int maxValue =9) //метод заполнения массива, введенные значения параметров minValue и  maxValue позволяют делать эти параметры не 
+                                                                //обязательными к заполнению
+{ 
+    maxValue++; //т.к. верхняя граница не включается
+    Random rnd = new Random(); // вызов конструктора для заполнения рондомными числами
+    for (int i = 0; i < array.Length; i++) // заполняем массив  numbers.Length - размер массива
+    {
+        array[i] = rnd.NextDouble()*(maxValue-minValue)+minValue;//верхняя граница не включается rnd.NextDouble() - выводит значения от 0 до 1, для увеличения диапазана приведены след ариф действия
+        array[i] = Math.Round(array[i],2);
+    }
+}
+void PrintArray(int[] array) //метод вывода массива
+{
+    for (int i = 0; i < array.Length; i++) // заполняем массив  numbers.Length - размер массива  
+    {
+        Console.Write($"{array[i]} ");
+    }
+    Console.WriteLine();
+}
+void PrintArrayDouble(double[] array) //метод вывода массива
+{
+    for (int i = 0; i < array.Length; i++) // заполняем массив  numbers.Length - размер массива  
+    {
+        Console.Write($"{array[i]} ");
+    }
+    Console.WriteLine();
+}//
 
+void Task34()
+{
+  Console.Clear();
+    Console.WriteLine("Задача 34: Задайте массив заполненный случайными положительными трёхзначными числами. Напишите программу, которая покажет количество чётных чисел в массиве.");
+
+    int size = 9; // указываем размер будущего массива
+    int[] numbers = new int[size]; //[] - обозначаем массив, начальный индекс массива =0
+    FillArray(numbers,100,999);
+    PrintArray(numbers);
+    Console.WriteLine();
+    int col =0;
+    
+      for (int i = 0; i < numbers.Length; i++)
+    {
+      if (numbers[i]%2==0) 
+        { 
+         col++;
         }
+    }
+   Console.Write($"{col} четных элементов массива");
+   Console.WriteLine();
+}
+Task34();
 
+void Task36()
+{
+    Console.WriteLine("\n Задача 36: Задайте одномерный массив, заполненный случайными числами. Найдите сумму элементов с нечётными индексами.");
 
-void Task25()
+    int size = 5; // указываем размер будущего массива
+    int[] numbers = new int[size]; //[] - обозначаем массив, начальный индекс массива =0
+    FillArray(numbers,-3,25);
+    PrintArray(numbers);
+    Console.WriteLine();
+    int Sum =0;
+    
+      for (int i = 0; i < numbers.Length; i++)
     {
-      Console.WriteLine ("Используя определение степени числа,напишите цикл, который принимает на вход два натуральных числа (A и B) и возводит число A в степень B");
-      int A = Input("Введите число A ");
-      int B = Input("Введите число B "); //степень числа
-      int P =1;
-      for (int i = 1;i<=B; i++)
-          {Console.Write($"{A} * ");
-            P*=A;
+      if (i%2!=0) 
+        { Console.Write($"{numbers[i]}+");
+         Sum=Sum+numbers[i];
          }
-      Console.Write ("\b\b= "); // \b-сдвиг каретки на 1 шаг
-      Console.Write(P);
     }
-Task25();
+   Console.Write($" \b\b = {Sum}");
+}
+Task36();
 
-void Task27()
+void Task38()
+{
+    Console.WriteLine(" \n Задача 38: Задайте массив вещественных чисел. Найдите разницу между максимальным и минимальным элементами массива");
+    int size = 8; // указываем размер будущего массива
+    double [] numbers = new double[size]; //[] - обозначаем массив, начальный индекс массива =0
+    FillArrayDouble(numbers,-3,25);
+    PrintArrayDouble(numbers);
+    Console.WriteLine();
+    double D =0;
+
+    for (int i = 0; i < numbers.Length - 1; i++)
     {
-     Console.WriteLine (" Задача 27: напишите программу, которая принимает на вход число и выдаёт сумму цифр в числе");
-      int A = Input("Введите число ");
-      int B = A;
-      int Sum = 0;
-      int n; // значение цифры в числе
-      while (A>0)
+        for (int a = 0; a < numbers.Length - i - 1; a++)
         {
-        n=A%10;
-        Console.Write($"{n} + ");
-        A=A/10;
-        Sum=Sum+n;
-        }
-    
-      Console.Write ("\b\b= "); // \b-сдвиг каретки на 1 шаг
-      Console.Write(Sum);
-    }
-
-Task27();
-
-void Task29()
-    {
-      Console.WriteLine (" Напишите программу, которая задаёт массив из 8 случайных целых чисел и выводит отсортированный по модулю массив.");  
-      int size = 8; // указываем размер будущего массива
-      Random rnd = new Random(); // вызов конструктора для заполнения рондомными числами
-      int[]numbers= new int [size]; //[] - обозначаем массив, начальный индекс массива =0
-      for (int i=0;i<size; i++) // заполняем массив
-      {
-            numbers[i]=rnd.Next(-20,20); //верхняя граница не включается
-      }
-      
-      for (int i=0;i<size-1; i++)
-      {
-            for (int a=0; a<size-i-1;a++)
+            if (numbers[a] >numbers[a + 1])
             {
-               if (Math.Abs(numbers[a])>Math.Abs(numbers[a+1]))
-               {
-                  int temp = numbers[a];
-                  numbers[a] = numbers[a+1];
-                  numbers[a+1] = temp;
-               }
-
+                double temp = numbers[a];
+                numbers[a] = numbers[a + 1];
+                numbers[a + 1] = temp;
             }
-            
-      }   
-        for (int i=0;i<size; i++)
-      {
-            Console.Write($"{numbers[i]} ");
-      }
-      }
-Task29();
 
-    
+        }
+
+    }
+    for (int i = 0; i < numbers.Length; i++)
+    {
+        Console.Write($"{numbers[i]} ");
+    }
+    D=Math.Round((numbers[numbers.Length-1]-numbers[0]),2);
+ Console.Write($"\n Разница между максимальным и минимальным элементами массива {D}");
 }
-}
+Task38();
+
+
+
